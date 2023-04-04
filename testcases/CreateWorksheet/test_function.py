@@ -39,10 +39,11 @@ class TestCreateWs(BaseTest):
 
         self.create_ws_page.click_blue_save_button()
         try:
+            time.sleep(3)
             self.create_ws_page.get_shared_popup()
         except Exception:
             self.logger.error("********** Shared popup not found *******")
-            pytest.fail("******** Test failed *********")
+            pytest.fail("******** Shared popup not found *********")
         self.logger.info("******* Test passed *******")
 
     def test_save_ws_template(self):

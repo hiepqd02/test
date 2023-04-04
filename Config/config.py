@@ -6,7 +6,7 @@ class TestData:
     DRAG_AND_DROP_GAME_URL = "https://worksheetzone.org/properties-of-3d-shapes-printable-interactive-62153f2b7ed2e5475841f871?play=true"
 
     CREATE_WORKSHEET_URL = "https://worksheetzone.org/create-worksheet/?utm_medium=header_button&start_mode=0"
-    PATH_TO_TEST_FILE = "/home/tdhpisme/AutoTest/test/pythonProject/TestFile/test_pic.jpg"
+    PATH_TO_TEST_FILE = "/home/tdhpisme/AutoTest/test/TestFile/test_pic.jpg"
 
     EMAIL_USERNAME = "abc.automationtest@gmail.com"
     EMAIL_PWD = "abcelearning2023"
