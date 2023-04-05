@@ -127,6 +127,7 @@ class CreateWorksheetPage(BasePage):
         arrow = self.driver.find_element(By.CSS_SELECTOR, "div.zoom-value-container > img")
         arrow.click()
         self.driver.find_element(*self.ZOOM_VALUE_ITEM[size]).click()
+        time.sleep(2)
 
     def add_page_with_button(self):
         WebDriverWait(self.driver, 10).until(
@@ -167,8 +168,8 @@ class CreateWorksheetPage(BasePage):
         return self.driver.execute_script("let element = document.getElementsByClassName('simplebar-content-wrapper')[0];return element.scrollTop"
                                           )
 
-    def get_page_position(self, index):
-        return self.driver.execute_script(f"let element = document.getElementsByClassName('canvas-pages')[{index}];return element.getBoundingClientRect();")
+    def get_page_position(self):
+        return self.driver.execute_script(f"let element = document.getElementsByClassName('canvas-pages');let lastElement=element[element.length-1];return lastElement.getBoundingClientRect();")
 
     def is_up_button_display(self):
         return self.is_display(self.SCROLL_TO_TOP_BUTTON)

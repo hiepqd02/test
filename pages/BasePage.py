@@ -6,10 +6,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
+from Utilities.customLog import LogGen
 
 
 
 class BasePage:
+    logger = LogGen.loggen()
+
     def __init__(self, driver):
         self.driver = driver
 
@@ -30,7 +33,7 @@ class BasePage:
 
     def do_lick(self, locator):
         element = WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located(locator)
+            EC.element_to_be_clickable(locator)
         )
         element.click()
 

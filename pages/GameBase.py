@@ -7,6 +7,7 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys
 
 from pages.BasePage import BasePage
+from pages.CreateWorksheetPage import CreateWorksheetPage
 
 
 class GameBase(BasePage):
@@ -24,6 +25,9 @@ class GameBase(BasePage):
     SEND_BUTTON = (By.CSS_SELECTOR, '.button-send')
     ALERT_SUCCESS_POPUP = (By.CSS_SELECTOR, '.alert-success')
     BACK_BUTTON = (By.CSS_SELECTOR, '.back')
+
+    CUSTOMIZE_ICON = (By.CSS_SELECTOR, ".function-button-container.edit-btn")
+    CUSTOMIZE_BUTTON = (By.CSS_SELECTOR, "div.edit-worksheet-btn > div > div > div.btn")
 
     # Submit/Try again
     def get_submit_button(self):
@@ -121,3 +125,12 @@ class GameBase(BasePage):
 
     def click_back_arrow_button(self):
         self.do_lick(self.BACK_BUTTON)
+
+    def click_customize_icon(self):
+        self.do_lick(self.CUSTOMIZE_ICON)
+        time.sleep(2)
+        self.logger.info("**** Click customize icon *******")
+    
+    def click_customize_button(self):
+        self.do_lick(self.CUSTOMIZE_BUTTON)
+        self.logger.info("***** Click customize button *****")

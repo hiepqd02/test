@@ -5,12 +5,32 @@ import pytest
 from Config.config import TestData
 from pages.CreateWorksheetPage import CreateWorksheetPage
 from pages.HomePage import HomePage
+from pages.GameInput import GameInputWorksheet
+from pages.PreviewPage import PreviewPage
 from testcases.test_base import BaseTest
 from Utilities.customLog import LogGen
 
 
 class TestCreateWs(BaseTest):
     logger = LogGen.loggen()
+
+    def test_open_create_page_from_play(self):
+        self.logger.info("****** Test 002 *********")
+        play_page = GameInputWorksheet(self.driver)
+        self.logger.info("****** Play Page ******")
+        play_page.click_customize_icon()
+        create_page = play_page.click_customize_button()
+        self.logger.info("*****Create Page *****")
+        self.logger.info("***** Test passed ******")
+
+    def test_open_create_page_from_preview(self):
+        self.logger.info("****** Test 003 *********")
+        preview_page = PreviewPage(self.driver)
+        preview_page.open_browser()
+        self.logger.info("****** Preview Page ******")
+        create_page = preview_page.click_customize_button()
+        self.logger.info("*****Create Page *****")
+        self.logger.info("***** Test passed ******")
 
     def test_save_worksheet_after_upload(self):
         try:
@@ -171,7 +191,6 @@ class TestCreateWs(BaseTest):
             pytest.fail()
             self.logger.error("****** Zoom in failed ******")
 
-
     def test_feed_back_pop_up_1(self):
         self.logger.info("****** Test 008 ******")
         pytest.skip()
@@ -205,13 +224,12 @@ class TestCreateWs(BaseTest):
         time.sleep(3)
         self.logger.info("********* Add Page ********")
         try:
-            current_page = create_ws_page.get_page_position(1)['top']
+            current_page = create_ws_page.get_page_position()['top']
             assert isclose(current_page, 30, abs_tol=1)
         except AssertionError:
             pytest.fail("******* Scroll to page failed *****")
             self.logger.info(create_ws_page.get_page_position(1))
         self.logger.info("******* Test passed *****")
-
 
     def test_add_page_with_icon(self):
         self.logger.info("****** Test 016 *****")
@@ -232,6 +250,7 @@ class TestCreateWs(BaseTest):
             self.logger.info(create_ws_page.get_page_position(1))
         self.logger.info("******* Test passed *****")
     #      Test 018
+
     def test_duplicate_page(self):
         pytest.skip()
 
@@ -273,8 +292,5 @@ class TestCreateWs(BaseTest):
     #     time.sleep(5)
     #     self.logger.info(create_page.get_scroll_position())
     #
-    # 
     #
-
-
-
+    #
