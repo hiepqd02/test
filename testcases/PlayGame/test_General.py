@@ -80,14 +80,13 @@ class TestGeneral(BaseTest):
             test_passed_flag = False
 
         try:
-            self.interactive_box_locations = self.preview_page.get_interactive_box_location()
-            for i in range(len(self.interactive_box_locations)):
+            interactive_box_locations = self.preview_page.get_interactive_box_location()
+            for i in range(len(interactive_box_locations)):
                 assert self.preview_page.is_correct_location(
-                    self.interactive_box_locations[i], TestData.INTERACTIVE_BOXES_LOCATION_PREVIEW_PAGE[i]
+                    interactive_box_locations[i], TestData.INTERACTIVE_BOXES_LOCATION_PREVIEW_PAGE[i]
                 )
         except AssertionError:
             self.logger.error("************ Interactive box location not match *************")
-            self.logger.info(self.interactive_box_location)
             test_passed_flag = False
 
         try:
