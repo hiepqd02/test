@@ -59,7 +59,7 @@ class TestCreateWs(BaseTest):
 
         self.create_ws_page.click_blue_save_button()
         try:
-            time.sleep(3)
+            time.sleep(5)
             self.create_ws_page.get_shared_popup()
         except Exception:
             self.logger.error("********** Shared popup not found *******")
@@ -166,7 +166,7 @@ class TestCreateWs(BaseTest):
 
         self.create_ws_page.change_ws_size(45)
         self.logger.info("****** Zoom out *******")
-        position_45 = self.create_ws_page.get_page_position(0)
+        position_45 = self.create_ws_page.get_page_position()
         try:
             assert isclose(
                 position_45['x'], TestData.PAGE_POSITION[0]['x'], abs_tol=1
@@ -179,7 +179,7 @@ class TestCreateWs(BaseTest):
 
         self.create_ws_page.change_ws_size(200)
         self.logger.info("******* Zoom in *******")
-        position_200 = self.create_ws_page.get_page_position(0)
+        position_200 = self.create_ws_page.get_page_position()
         try:
             assert isclose(
                 position_200['x'], TestData.PAGE_POSITION[1]['x'], abs_tol=1
@@ -227,8 +227,8 @@ class TestCreateWs(BaseTest):
             current_page = create_ws_page.get_page_position()['top']
             assert isclose(current_page, 30, abs_tol=1)
         except AssertionError:
+            self.logger.info(create_ws_page.get_page_position())
             pytest.fail("******* Scroll to page failed *****")
-            self.logger.info(create_ws_page.get_page_position(1))
         self.logger.info("******* Test passed *****")
 
     def test_add_page_with_icon(self):
@@ -243,11 +243,11 @@ class TestCreateWs(BaseTest):
         create_ws_page.add_page_with_icon()
         time.sleep(3)
         try:
-            current_page = create_ws_page.get_page_position(1)['top']
+            current_page = create_ws_page.get_page_position()['top']
             assert isclose(current_page, 30, abs_tol=1)
         except AssertionError:
+            self.logger.info(create_ws_page.get_page_position())
             pytest.fail("******* Scroll to page failed *****")
-            self.logger.info(create_ws_page.get_page_position(1))
         self.logger.info("******* Test passed *****")
     #      Test 018
 
