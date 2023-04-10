@@ -1,6 +1,7 @@
 import time
 from math import isclose
 import pytest
+from selenium.webdriver.common.by import By
 
 from Config.config import TestData
 from pages.CreateWorksheetPage import CreateWorksheetPage
@@ -239,9 +240,9 @@ class TestCreateWs(BaseTest):
         create_ws_page = preview_page.click_customize_button()
         create_ws_page.switchTab(1)
         self.logger.info("**** Create Page *****")
-        time.sleep(5)
+        time.sleep(10)
         create_ws_page.add_page_with_icon()
-        time.sleep(3)
+        time.sleep(2)
         try:
             current_page = create_ws_page.get_page_position()['top']
             assert isclose(current_page, 30, abs_tol=1)
@@ -284,13 +285,57 @@ class TestCreateWs(BaseTest):
             pytest.fail()
         self.logger.info("**** Test Passed *****")
 
-    # def test_page(self):
-    #     create_page = CreateWorksheetPage(self.driver)
-    #     create_page.open_browser()
-    #     self.logger.info(create_page.get_scroll_position())
-    #     create_page.add_page_with_button()
-    #     time.sleep(5)
-    #     self.logger.info(create_page.get_scroll_position())
-    #
-    #
-    #
+    def test_tag_bar_when_add_new_page(self):
+        create_page = CreateWorksheetPage(self.driver)
+        create_page.open_browser()
+        
+        create_page.click_on_tag_bar_icon()
+        time.sleep(5)
+
+        create_page.add_page_with_button()
+        time.sleep(5)
+
+        create_page.add_page_with_icon()
+        time.sleep(5)
+
+
+    def test_tag_bar_when_duplicate(self):
+        create_page = CreateWorksheetPage(self.driver)
+        create_page.open_browser()
+        
+
+        create_page.click_on_tag_bar_icon()
+        time.sleep(5)
+
+        create_page.click_duplicate_icon()
+        time.sleep(5)
+        
+    def test_tag_bar_when_edit(self):
+        create_page = CreateWorksheetPage(self.driver)
+        create_page.open_browser()
+        
+        create_page.click_on_tag_bar_icon()
+        time.sleep(5)
+
+        create_page.pick_a_template()
+        time.sleep(5)
+
+        create_page.add_page_with_icon()
+        time.sleep(5)
+
+        create_page.pick_a_template()
+        time.sleep(5)
+
+
+
+
+
+
+
+    
+
+    def test_page(self):
+        create_page = CreateWorksheetPage(self.driver)
+        create_page.open_browser()
+        locator = (By.CSS_SELECTOR, "#app > div:nth-child(1) > div > div.header-create-ws")
+        self.logger.info(create_page.get_element_location(locator))

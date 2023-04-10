@@ -53,6 +53,13 @@ class BasePage:
             EC.visibility_of_element_located(locator)
         )
         return element.location
+    
+    def get_element_location(self, locator):
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(locator)
+        )
+        rect = self.driver.execute_script(f"let element = document.querySelector('{locator[1]}');return element.getBoundingClientRect();")
+        return {'x': rect['x'], 'y': rect['y']}
 
     def is_correct_location(self, location, actual_location):
         tolerance = 20

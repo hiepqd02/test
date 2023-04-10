@@ -51,7 +51,8 @@ class GameBase(BasePage):
         return self.driver.find_element(*self.GRADE)
 
     def get_position_of_grade(self):
-        return self.get_grade_element().location
+        # return self.get_grade_element().location
+        return self.get_element_location(self.GRADE)
 
     def get_grade_value(self):
         grade_value = self.get_grade_element().text[0]
@@ -115,10 +116,10 @@ class GameBase(BasePage):
         )
 
     def get_submit_button_location(self):
-        return self.get_location(self.SUBMIT_BUTTON)
+        return self.get_element_location(self.SUBMIT_BUTTON)
 
     def get_try_again_button_location(self):
-        return self.get_location(self.TRY_AGAIN_BUTTON)
+        return self.get_element_location(self.TRY_AGAIN_BUTTON)
 
     def click_three_dots_button(self):
         self.do_lick(self.THREE_DOTS_BUTTON)

@@ -15,7 +15,7 @@ class TestData:
     # Location
     GRADE_LOCATION = {'x': 1087, 'y': 42}
     SUBMIT_BUTTON_LOCATION = {'x': 610, 'y': 828}
-    TRY_AGAIN_BUTTON_LOCATION = {'x': 1312, 'y': 451}
+    TRY_AGAIN_BUTTON_LOCATION = {'x': 1308, 'y': 423}
     SUBMIT_BUTTON_LOCATION_DROP_DOWN = {'x': 1312, 'y': 522}
     INTERACTIVE_BOXES_LOCATION_PREVIEW_PAGE = [{'x': 474, 'y': 135},
                                                {'x': 458, 'y': 414},

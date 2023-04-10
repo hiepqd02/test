@@ -24,6 +24,7 @@ class TestGeneral(BaseTest):
 
         try:
             submit_btn_location = self.play_page.get_submit_button_location()
+            self.logger.info(submit_btn_location)
             assert self.play_page.is_correct_location(submit_btn_location, TestData.SUBMIT_BUTTON_LOCATION)
 
         except AssertionError:
@@ -86,6 +87,7 @@ class TestGeneral(BaseTest):
                     interactive_box_locations[i], TestData.INTERACTIVE_BOXES_LOCATION_PREVIEW_PAGE[i]
                 )
         except AssertionError:
+            self.logger.info(interactive_box_locations)
             self.logger.error("************ Interactive box location not match *************")
             test_passed_flag = False
 
