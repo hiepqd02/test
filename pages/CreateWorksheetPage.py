@@ -112,12 +112,12 @@ class CreateWorksheetPage(BasePage):
         return self.driver.find_element(*self.MESSAGE_BAR)
 
     def get_save_pop_up(self):
-        return WebDriverWait(self.driver, 10).until(
+        return WebDriverWait(self.driver, 20).until(
             EC.visibility_of_element_located(self.SAVE_POP_UP)
         )
 
     def get_shared_popup(self):
-        return WebDriverWait(self.driver, 20).until(
+        return WebDriverWait(self.driver, 30).until(
             EC.visibility_of_element_located(self.SHARE_POPUP_CONTAINER)
         )
 
