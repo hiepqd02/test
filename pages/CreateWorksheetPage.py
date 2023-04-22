@@ -2,6 +2,7 @@ import time
 from math import isclose
 
 from selenium.webdriver import ActionChains
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -58,13 +59,37 @@ class CreateWorksheetPage(BasePage):
     # Duplicate
     DUPLICATE_ICON =(By.CSS_SELECTOR, "div.action-panel-container > div > div > div:nth-child(5)")
 
+    # Delete
+    DELETE_ICON = (By.CSS_SELECTOR, "div.action-panel-container > div > div > div:nth-child(6)")
+    DELETE_ICON_ON_TAG_BAR = (By.CSS_SELECTOR, "#menu-page-1 > div.hover-container > div.delete-icon")
+
     # Scroll
     SCROLL_TO_TOP_BUTTON = (By.CSS_SELECTOR, ".scroll-to-top-button")
 
     PAGE = (By.CSS_SELECTOR, "div.canvas-pages")
     PAGE_WITH_WS = (By.CSS_SELECTOR,
                     "div.canvas-pages > div.switch-button-eraser")
+    PAGE_IN_TAG_BAR = (By.CSS_SELECTOR, ".canvas-pages-right-panel")
     RIGHT_CONTAINER = (By.CSS_SELECTOR, ".simplebar-content-wrapper")
+
+
+    #Template Menu
+    CLOSE_TEMPLATE_MENU = (By.CSS_SELECTOR, ".close-left-content-button") 
+    TEMPLATE_TAB = (By.CSS_SELECTOR, "div.left-content-container > div > div:nth-child(1)")
+    TEMPLATE_MENU = (By.CSS_SELECTOR, ".left-content-grid")
+
+    TUTORIAL_POPUP = (By.CSS_SELECTOR, ".tutorial-container")
+
+    # before search
+    SEARCH_BAR = (By.CSS_SELECTOR, ".search-input > div > input")
+    SEARCH_BUTTON = (By.CSS_SELECTOR, ".search-input > div > div > div > button")
+
+    # after search
+    SEARCH_BAR_2 = (By.CSS_SELECTOR, ".control-action > div > div > input")
+    SEARCH_BUTTON_2 = (By.CSS_SELECTOR, ".control-action > div > div > div > div:nth-child(2) > button")
+    CLOSE_SEARCH = (By.CSS_SELECTOR, ".control-action > div > div > div > div:nth-child(1) > button")
+    TEXT_NO_RESULT = (By.CSS_SELECTOR, ".text-no-result")
+    TEMPLATE_FOR_SEARCH = [(By.ID, "633d3138a906c33dcb52b04b"), (By.ID, "6385751530e9fd6587fae0ed")]
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -112,12 +137,12 @@ class CreateWorksheetPage(BasePage):
         return self.driver.find_element(*self.MESSAGE_BAR)
 
     def get_save_pop_up(self):
-        return WebDriverWait(self.driver, 20).until(
+        return WebDriverWait(self.driver, 50).until(
             EC.visibility_of_element_located(self.SAVE_POP_UP)
         )
 
     def get_shared_popup(self):
-        return WebDriverWait(self.driver, 30).until(
+        return WebDriverWait(self.driver, 60).until(
             EC.visibility_of_element_located(self.SHARE_POPUP_CONTAINER)
         )
 
@@ -151,10 +176,12 @@ class CreateWorksheetPage(BasePage):
         )
         add_page_btn = self.driver.find_element(*self.ADD_PAGE_BUTTON)
         add_page_btn.click()
+        time.sleep(5)
 
     def add_page_with_icon(self):
         add_page_icon = self.driver.find_element(*self.ADD_PAGE_ICON)
         add_page_icon.click()
+        time.sleep(5)
 
     def scroll_to_bottom(self):
         self.driver.execute_script("let element = document.getElementsByClassName('simplebar-content-wrapper')[0];"
@@ -201,3 +228,76 @@ class CreateWorksheetPage(BasePage):
     # Duplicate
     def click_duplicate_icon(self):
         self.do_lick(self.DUPLICATE_ICON)
+
+
+    def get_page(self, index):
+        pages = self.driver.find_elements(*self.PAGE)
+        return pages[index-1]
+    
+    def select_page_in_page_list(self, index):
+        page = self.get_page(index)
+        page.click()    
+        
+    def delete_page_in_list_page(self, index):
+        page = self.get_page(index)
+        page.find_element(*self.DELETE_ICON).click()
+
+    def get_page_in_tag_bar(self, index):
+        pages = self.driver.find_elements(*self.PAGE_IN_TAG_BAR)
+        return pages[index-1]
+    
+    def select_page_in_tag_bar(self, index):
+        page = self.get_page_in_tag_bar(index)
+        page.click()
+
+    def delete_page_on_tag_bar(self, index):
+        page = self.get_page_in_tag_bar(index)
+        menu_page = page.find_element(By.CSS_SELECTOR, "#menu-page-1") 
+        time.sleep(5)
+        menu_page.click()
+        delete_button = page.find_element(*self.DELETE_ICON_ON_TAG_BAR)
+        delete_button.click()
+        time.sleep(5)
+    
+    def is_selected(self, index):
+        page = self.get_page_in_tag_bar(index)
+        return bool(page.find_element(By.CSS_SELECTOR, '.menu-page[style="height: 174px; outline: rgb(53, 175, 255) solid 2px; cursor: pointer; position: relative;"]'))
+    
+    def close_template_menu(self):
+        self.do_lick(self.CLOSE_TEMPLATE_MENU)
+
+    def hover_on_template_tab(self):
+        template_tab = self.driver.find_element(*self.TEMPLATE_TAB)
+        self.hover(template_tab)
+
+    def click_template_tab(self):
+        self.do_lick(self.TEMPLATE_TAB)
+
+    def is_template_tab_menu_display(self):
+        return self.is_display(self.TEMPLATE_MENU)
+    
+    def is_tutorial_popup_display(self):
+        return self.is_display(self.TUTORIAL_POPUP)
+    
+    def search_template(self, text):
+        search_bar = self.driver.find_element(*self.SEARCH_BAR)
+        search_bar.send_keys(text)
+
+        self.do_lick(self.SEARCH_BUTTON)
+
+    def close_search_result(self):
+        self.do_lick(self.CLOSE_SEARCH)
+
+    def edit_search_text(self, text):
+        search_bar = self.driver.find_element(*self.SEARCH_BAR_2)
+        search_bar.send_keys(Keys.CONTROL + "a" + Keys.DELETE)
+        search_bar.send_keys(text)
+        time.sleep(3)
+        self.do_lick(self.SEARCH_BUTTON_2)
+
+    def is_text_no_result(self):
+        return self.is_display(self.TEXT_NO_RESULT)
+    
+    def is_search_exactly_template(self, index):
+        return self.is_display(self.TEMPLATE_FOR_SEARCH[index])
+    

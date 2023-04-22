@@ -86,7 +86,7 @@ class BasePage:
 
     def hover(self, element):
         action = ActionChains(self.driver)
-        action.move_to_element(element)
+        action.move_to_element(element).perform()
 
 
 

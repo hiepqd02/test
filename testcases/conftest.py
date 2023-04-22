@@ -13,7 +13,7 @@ def init_driver(request):
     driver.set_window_size(1920, 1080)
     driver.implicitly_wait(5)
     yield driver
-    driver.close()
+    driver.quit()
 
 
 @pytest.hookimpl(hookwrapper=True)
