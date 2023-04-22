@@ -40,7 +40,6 @@ class TestCreateWsTemplate(BaseTest):
         create_page.open_browser()
 
         create_page.search_template("kjdhakj")
-        time.sleep(5)
 
         assert create_page.is_text_no_result()
 

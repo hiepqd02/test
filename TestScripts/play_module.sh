@@ -1,7 +1,7 @@
 
 cd /home/tdhpisme/AutoTest/test
 source ./venv/bin/activate
-pytest -k "test_close_template_menu" --html=/home/tdhpisme/AutoTest/client/public/details-rp/play_report.html --json-report --json-report-file=/home/tdhpisme/AutoTest/client/public/play_module.json --self-contained-html
+pytest -k "test_search_not_existed_template" --html=/home/tdhpisme/AutoTest/client/public/details-rp/play_report.html --json-report --json-report-file=/home/tdhpisme/AutoTest/client/public/play_module.json --self-contained-html
 
 
 

@@ -76,13 +76,14 @@ class TestCreateWs(BaseTest):
         self.create_ws_page = home_page.get_started()
         self.logger.info("*******  Create Ws Page **********")
         self.create_ws_page.switchTab(1)
-
+        time.sleep(5)
         self.create_ws_page.pick_a_template()
         self.logger.info("****** Pick a template *******")
-
+        time.sleep(3)
         self.create_ws_page.click_red_save_button()
         self.logger.info("********** Save ********")
         ##
+        time.sleep(5)
         try:
             assert bool(self.create_ws_page.get_save_pop_up())
         except Exception:

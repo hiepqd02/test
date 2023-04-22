@@ -24,7 +24,7 @@ class BasePage:
 
     def is_display(self, locator):
         try:
-            element = WebDriverWait(self.driver, 5).until(
+            element = WebDriverWait(self.driver, 20).until(
                 EC.visibility_of_element_located(locator)
             )
             return True
