@@ -219,7 +219,7 @@ class TestCreateWs(BaseTest):
         preview_page = home_page.select_worksheet()
         create_ws_page = preview_page.click_customize_button()
         create_ws_page.switchTab(1)
-        time.sleep(5)
+        time.sleep(10)
         self.logger.info("****** Create Page ******")
 
         create_ws_page.add_page_with_button()
