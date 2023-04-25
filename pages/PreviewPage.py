@@ -32,11 +32,11 @@ class PreviewPage(BasePage):
             def open_ws(self):
                 pass
 
-        self.do_lick(self.PLAY_NOW_BUTTON)
+        self.do_click(self.PLAY_NOW_BUTTON)
         return PlayPage(self.driver)
 
     def click_customize_button(self):
-        self.do_lick(self.CUSTOMIZE_BUTTON)
+        self.do_click(self.CUSTOMIZE_BUTTON)
         return CreateWorksheetPage(self.driver)
 
     def get_interactive_box_location(self):
