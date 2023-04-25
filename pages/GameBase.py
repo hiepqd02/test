@@ -69,7 +69,7 @@ class GameBase(BasePage):
         )
 
     def click_show_answer_button(self):
-        self.do_lick(self.SHOW_ANSWER_BUTTON)
+        self.do_click(self.SHOW_ANSWER_BUTTON)
 
     def get_answers(self):
         list_answer = []
@@ -108,7 +108,7 @@ class GameBase(BasePage):
         # email.send_keys("example@email.com")
 
     def click_send_button(self):
-        self.do_lick(self.SEND_BUTTON)
+        self.do_click(self.SEND_BUTTON)
 
     def get_alert_success_popup(self):
         return WebDriverWait(self.driver, 10).until(
@@ -122,16 +122,16 @@ class GameBase(BasePage):
         return self.get_element_location(self.TRY_AGAIN_BUTTON)
 
     def click_three_dots_button(self):
-        self.do_lick(self.THREE_DOTS_BUTTON)
+        self.do_click(self.THREE_DOTS_BUTTON)
 
     def click_back_arrow_button(self):
-        self.do_lick(self.BACK_BUTTON)
+        self.do_click(self.BACK_BUTTON)
 
     def click_customize_icon(self):
-        self.do_lick(self.CUSTOMIZE_ICON)
+        self.do_click(self.CUSTOMIZE_ICON)
         time.sleep(2)
         self.logger.info("**** Click customize icon *******")
     
     def click_customize_button(self):
-        self.do_lick(self.CUSTOMIZE_BUTTON)
+        self.do_click(self.CUSTOMIZE_BUTTON)
         self.logger.info("***** Click customize button *****")

@@ -294,7 +294,7 @@ class TestCreateWs(BaseTest):
         create_page.click_on_tag_bar_icon()
         time.sleep(5)
 
-        create_page.add_page_with_button()
+        create_page.add_page_with_icon()
         assert create_page.is_page_on_tab_bar_display(2)
 
         create_page.click_duplicate_icon_on_tab_bar(2)
@@ -326,7 +326,7 @@ class TestCreateWs(BaseTest):
 
         create_page.click_on_tag_bar_icon()
         for i in range(3):
-            create_page.add_page_with_button()
+            create_page.add_page_with_icon()
             time.sleep(3)
 
         create_page.delete_page_in_list_page(1)
@@ -345,7 +345,7 @@ class TestCreateWs(BaseTest):
 
 
         for i in range(4):
-            create_page.add_page_with_button()
+            create_page.add_page_with_icon()
             time.sleep(1)        
         
 
@@ -369,7 +369,7 @@ class TestCreateWs(BaseTest):
         create_page.click_on_tag_bar_icon()
 
         for i in range(4):
-            create_page.add_page_with_button() 
+            create_page.add_page_with_icon() 
             time.sleep(1)        
         
 
@@ -389,7 +389,7 @@ class TestCreateWs(BaseTest):
         create_page.click_on_tag_bar_icon()
 
         for i in range(2):
-            create_page.add_page_with_button() 
+            create_page.add_page_with_icon() 
             time.sleep(1)        
         
 
