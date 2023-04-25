@@ -31,7 +31,7 @@ class BasePage:
         except Exception:
             return False
 
-    def do_lick(self, locator):
+    def do_click(self, locator):
         element = WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable(locator)
         )

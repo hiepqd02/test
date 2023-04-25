@@ -1,9 +1,10 @@
-
+#!/bin/bash
 cd /home/tdhpisme/AutoTest/test
 source ./venv/bin/activate
-pytest -k "test_search_not_existed_template" --html=/home/tdhpisme/AutoTest/client/public/details-rp/play_report.html --json-report --json-report-file=/home/tdhpisme/AutoTest/client/public/play_module.json --self-contained-html
+pytest -k "test_delete_page_on_tag_bar" --reruns 0 --html=/home/tdhpisme/AutoTest/client/public/details-rp/play_report.html --json-report --json-report-file=/home/tdhpisme/AutoTest/client/public/play_module.json --self-contained-html
 
 
+# pytest -k "test_search_not_existed_template" --reruns 2
 
 
 # gunicorn --bind 0.0.0.0:8000 -D wsgi:app --reload

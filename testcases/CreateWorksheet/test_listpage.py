@@ -223,7 +223,7 @@ class TestCreateWs(BaseTest):
         self.logger.info("****** Create Page ******")
 
         create_ws_page.add_page_with_button()
-        time.sleep(10)
+        time.sleep(3)
         self.logger.info("********* Add Page ********")
         try:
             current_page = create_ws_page.get_page_position()['top']
@@ -248,17 +248,17 @@ class TestCreateWs(BaseTest):
             current_page = create_ws_page.get_page_position()['top']
             assert isclose(current_page, 30, abs_tol=1)
         except AssertionError:
-            self.logger.info(create_ws_page.get_page_position())
+            self.logger.info(create_ws_page.get_page_position())    
             pytest.fail("******* Scroll to page failed *****")
         self.logger.info("******* Test passed *****")
+   
     #      Test 018
+    # def test_duplicate_page(self):
+    #     pytest.skip()
 
-    def test_duplicate_page(self):
-        pytest.skip()
-
-    #   Test 019
-    def test_move_up_down(self):
-        pytest.skip()
+    # #   Test 019
+    # def test_move_up_down(self):
+    #     pytest.skip()
 
     #     Test 020
     def test_scroll_to_top(self):
@@ -266,6 +266,7 @@ class TestCreateWs(BaseTest):
         create_page = CreateWorksheetPage(self.driver)
         create_page.open_browser()
         self.logger.info("********* Create Page *******")
+        time.sleep(3)
 
         create_page.scroll_to_bottom()
         self.logger.info("********* Scroll to bottom *****")
@@ -286,8 +287,7 @@ class TestCreateWs(BaseTest):
             pytest.fail()
         self.logger.info("**** Test Passed *****")
 
-    def test_tag_bar_when_add_new_page(self):
-        # pytest.skip()
+    def test_tag_bar_when_duplicate(self):
         create_page = CreateWorksheetPage(self.driver)
         create_page.open_browser()
         
@@ -295,44 +295,31 @@ class TestCreateWs(BaseTest):
         time.sleep(5)
 
         create_page.add_page_with_button()
-        time.sleep(5)
+        assert create_page.is_page_on_tab_bar_display(2)
 
-        create_page.add_page_with_icon()
-        time.sleep(5)
+        create_page.click_duplicate_icon_on_tab_bar(2)
+        assert create_page.is_page_on_tab_bar_display(3) 
 
-
-    def test_tag_bar_when_duplicate(self):
-        pytest.skip()
-        create_page = CreateWorksheetPage(self.driver)
-        create_page.open_browser()
         
-
-        create_page.click_on_tag_bar_icon()
-        time.sleep(5)
-
-        create_page.click_duplicate_icon()
-        time.sleep(5)
+    # def test_tag_bar_when_edit(self):
+    #     pytest.skip()
+    #     create_page = CreateWorksheetPage(self.driver)
+    #     create_page.open_browser()
         
-    def test_tag_bar_when_edit(self):
-        pytest.skip()
-        create_page = CreateWorksheetPage(self.driver)
-        create_page.open_browser()
-        
-        create_page.click_on_tag_bar_icon()
-        time.sleep(5)
+    #     create_page.click_on_tag_bar_icon()
+    #     time.sleep(5)
 
-        create_page.pick_a_template()
-        time.sleep(5)
+    #     create_page.pick_a_template()
+    #     time.sleep(5)
 
-        create_page.add_page_with_icon()
-        time.sleep(5)
+    #     create_page.add_page_with_icon()
+    #     time.sleep(5)
 
-        create_page.pick_a_template()
-        time.sleep(5)
+    #     create_page.pick_a_template()
+    #     time.sleep(5)
 
     # Testcase 25
     def test_tag_bar_when_delete(self):
-        pytest.skip()
         create_page = CreateWorksheetPage(self.driver)
         create_page.open_browser()
         
@@ -343,75 +330,79 @@ class TestCreateWs(BaseTest):
             time.sleep(3)
 
         create_page.delete_page_in_list_page(1)
+        assert not create_page.is_page_on_tab_bar_display(4)
 
         time.sleep(3)
 
         create_page.delete_page_in_list_page(2)
-
+        assert not create_page.is_page_on_tab_bar_display(3)
         time.sleep(3)
 
     def test_select_page_on_tag_bar(self):
-        pytest.skip()
         create_page = CreateWorksheetPage(self.driver)
         create_page.open_browser()
+        create_page.click_on_tag_bar_icon()
 
 
         for i in range(4):
             create_page.add_page_with_button()
             time.sleep(1)        
         
-        create_page.click_on_tag_bar_icon()
 
         create_page.select_page_in_page_list(2)
         time.sleep(2)
-
+        assert create_page.is_page_on_tab_bar_selected(2)
         create_page.select_page_in_tag_bar(3)
         time.sleep(2)
-        
+        assert create_page.is_page_on_tab_bar_selected(3)
         create_page.scroll_to_bottom()
         time.sleep(2)
 
         create_page.select_page_in_page_list(5)
         time.sleep(2)
+        assert create_page.is_page_on_tab_bar_selected(5)
     
     def test_delete_page_list_page(self):
-        pytest.skip()
         create_page = CreateWorksheetPage(self.driver)
         create_page.open_browser()
 
+        create_page.click_on_tag_bar_icon()
 
         for i in range(4):
             create_page.add_page_with_button() 
             time.sleep(1)        
         
-        create_page.click_on_tag_bar_icon()
 
         create_page.delete_page_in_list_page(1)
         time.sleep(2)
+        assert create_page.is_page_on_list_page_display(4)
 
         create_page.delete_page_in_list_page(2)
         time.sleep(2)
+        assert create_page.is_page_on_list_page_display(3)
+
 
     def test_delete_page_on_tag_bar(self):
-        pytest.skip()
         create_page = CreateWorksheetPage(self.driver)
         create_page.open_browser()
 
         create_page.click_on_tag_bar_icon()
 
-        for i in range(4):
+        for i in range(2):
             create_page.add_page_with_button() 
             time.sleep(1)        
         
 
 
         create_page.delete_page_on_tag_bar(3)
-
+        assert not create_page.is_page_on_tab_bar_display(3)
         
 
-    def test_page(self):
-        pytest.skip()
-        create_page = CreateWorksheetPage(self.driver)
-        create_page.open_browser()
-        locator = (By.CSS_SELECTOR, "#app > div:nth-child(1) > div > div.header-create-ws")
-        self.logger.info(create_page.get_element_location(locator))
+    # def test_page(self):
+    #     pytest.skip()
+    #     create_page = CreateWorksheetPage(self.driver)
+    #     create_page.open_browser()
+    #     locator = (By.CSS_SELECTOR, "#app > div:nth-child(1) > div > div.header-create-ws")
+    #     self.logger.info(create_page.get_element_location(locator))
+
+    

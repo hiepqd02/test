@@ -35,3 +35,8 @@ def pytest_runtest_makereport(item, call):
 def pytest_html_report_title(report):
     report.title = "Automation Test Report!"
 
+
+# def pytest_html_results_table_row(report, cells):
+#     if report.rerun:
+#         del cells[:]
+

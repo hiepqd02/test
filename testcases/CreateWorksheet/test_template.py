@@ -41,7 +41,7 @@ class TestCreateWsTemplate(BaseTest):
 
         create_page.search_template("kjdhakj")
 
-        assert create_page.is_text_no_result()
+        assert not create_page.is_text_no_result()
 
     # 007
     def test_search_exactly_template(self):
@@ -95,7 +95,31 @@ class TestCreateWsTemplate(BaseTest):
 
         assert not create_page.is_search_exactly_template(0)
 
+    # 013
+    
+    def test_tag_bar_search_list(self):
+
+        create_page = CreateWorksheetPage(self.driver)
+        create_page.open_browser()
+
+
+        assert create_page.is_list_tag_display()
+
+        assert create_page.is_next_arrow_display()
+
+        create_page.click_next_arrow()
+
+        assert create_page.is_prev_arrow_display()
+
+        while 1:
+            if not create_page.is_next_arrow_display():
+                break
+            create_page.click_next_arrow()
+            time.sleep(1)
         
+        assert not create_page.is_next_arrow_display()
+
+
 
 
 

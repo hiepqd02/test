@@ -53,12 +53,13 @@ class CreateWorksheetPage(BasePage):
     ADD_PAGE_ICON = (
         By.CSS_SELECTOR, "div.action-panel-container > div > div > div:nth-child(7)")
     
-    # Tag Bar
+    # Tab Bar
     TAG_BAR_ICON =(By.CSS_SELECTOR, "div.action-panel-container > div > div > div:nth-child(8)")
+    TAB_BAR_PAGE = (By.CSS_SELECTOR, ".canvas-pages-right-panel")
 
     # Duplicate
     DUPLICATE_ICON =(By.CSS_SELECTOR, "div.action-panel-container > div > div > div:nth-child(5)")
-
+    DUPLICATE_ICON_ON_TAB_BAR = (By.CSS_SELECTOR, "#menu-page-1 > div.hover-container > div.duplicate")
     # Delete
     DELETE_ICON = (By.CSS_SELECTOR, "div.action-panel-container > div > div > div:nth-child(6)")
     DELETE_ICON_ON_TAG_BAR = (By.CSS_SELECTOR, "#menu-page-1 > div.hover-container > div.delete-icon")
@@ -90,6 +91,12 @@ class CreateWorksheetPage(BasePage):
     CLOSE_SEARCH = (By.CSS_SELECTOR, ".control-action > div > div > div > div:nth-child(1) > button")
     TEXT_NO_RESULT = (By.CSS_SELECTOR, ".text-no-result")
     TEMPLATE_FOR_SEARCH = [(By.ID, "633d3138a906c33dcb52b04b"), (By.ID, "6385751530e9fd6587fae0ed")]
+
+    LIST_TAG = (By.CSS_SELECTOR, ".list-sub-content-tag")
+    NEXT_ARROW_BTN = (By.CSS_SELECTOR, ".arrow-container.next-arrow > div.circle-arrow")
+    PREV_ARROW_BTN = (By.CSS_SELECTOR, ".arrow-container.prev-arrow > div.circle-arrow")
+
+
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -217,22 +224,32 @@ class CreateWorksheetPage(BasePage):
         return self.is_display(self.SCROLL_TO_TOP_BUTTON)
 
 
-    # Tag bar
+    # Tab bar
     def hover_on_tag_bar_icon(self):
         tag_bar_icon = self.driver.find_element(*self.TAG_BAR_ICON)
         self.hover(tag_bar_icon)
 
     def click_on_tag_bar_icon(self):
-        self.do_lick(self.TAG_BAR_ICON)
+        self.do_click(self.TAG_BAR_ICON)
+
+
+
 
     # Duplicate
     def click_duplicate_icon(self):
-        self.do_lick(self.DUPLICATE_ICON)
+        self.do_click(self.DUPLICATE_ICON)
 
 
     def get_page(self, index):
         pages = self.driver.find_elements(*self.PAGE)
         return pages[index-1]
+    
+    def is_page_on_list_page_display(self, index):
+        try:
+            page = self.get_page(index)
+            return True
+        except Exception:
+            return False
     
     def select_page_in_page_list(self, index):
         page = self.get_page(index)
@@ -241,10 +258,18 @@ class CreateWorksheetPage(BasePage):
     def delete_page_in_list_page(self, index):
         page = self.get_page(index)
         page.find_element(*self.DELETE_ICON).click()
+        
 
     def get_page_in_tag_bar(self, index):
         pages = self.driver.find_elements(*self.PAGE_IN_TAG_BAR)
         return pages[index-1]
+    
+    def click_duplicate_icon_on_tab_bar(self, index):
+        page = self.get_page_in_tag_bar(index)
+        self.hover(page)
+        icon = page.find_element(*self.DUPLICATE_ICON_ON_TAB_BAR)
+        icon.click()
+
     
     def select_page_in_tag_bar(self, index):
         page = self.get_page_in_tag_bar(index)
@@ -253,16 +278,26 @@ class CreateWorksheetPage(BasePage):
     def delete_page_on_tag_bar(self, index):
         page = self.get_page_in_tag_bar(index)
         menu_page = page.find_element(By.CSS_SELECTOR, "#menu-page-1") 
-        time.sleep(5)
         menu_page.click()
         delete_button = page.find_element(*self.DELETE_ICON_ON_TAG_BAR)
         delete_button.click()
         time.sleep(5)
+
+    def is_page_on_tab_bar_display(self, index):
+        try:
+            self.get_page_in_tag_bar(index)
+            return True
+        except Exception:
+            return False
     
-    def is_selected(self, index):
-        page = self.get_page_in_tag_bar(index)
-        return bool(page.find_element(By.CSS_SELECTOR, '.menu-page[style="height: 174px; outline: rgb(53, 175, 255) solid 2px; cursor: pointer; position: relative;"]'))
-    
+    def is_page_on_tab_bar_selected(self, index):
+        try:
+            page = self.get_page_in_tag_bar(index)
+            page.find_element(By.CSS_SELECTOR, '.menu-page[style="height: 174px; outline: rgb(53, 175, 255) solid 2px; cursor: pointer; position: relative;"]')
+            return True
+        except Exception:
+            return False
+        
     def close_template_menu(self):
         self.do_lick(self.CLOSE_TEMPLATE_MENU)
 
@@ -300,4 +335,20 @@ class CreateWorksheetPage(BasePage):
     
     def is_search_exactly_template(self, index):
         return self.is_display(self.TEMPLATE_FOR_SEARCH[index])
+    
+    def is_next_arrow_display(self):
+        return self.is_display(self.NEXT_ARROW_BTN)
+    
+    def is_prev_arrow_display(self):
+        return self.is_display(self.PREV_ARROW_BTN)
+    
+    def is_list_tag_display(self):
+        return self.is_display(self.LIST_TAG)
+    
+    def click_next_arrow(self):
+        return self.do_click(self.NEXT_ARROW_BTN)
+    
+
+
+    
     
