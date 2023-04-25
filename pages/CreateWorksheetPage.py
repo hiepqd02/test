@@ -105,7 +105,7 @@ class CreateWorksheetPage(BasePage):
         self.driver.get(TestData.CREATE_WORKSHEET_URL)
 
     def click_make_interactive_button(self):
-        self.do_lick(self.MAKE_INTERACTIVE_BUTTON)
+        self.do_click(self.MAKE_INTERACTIVE_BUTTON)
 
     def upload_file(self):
         upload_button = self.driver.find_element(*self.UPLOAD_IMAGE_BUTTON)
@@ -299,14 +299,14 @@ class CreateWorksheetPage(BasePage):
             return False
         
     def close_template_menu(self):
-        self.do_lick(self.CLOSE_TEMPLATE_MENU)
+        self.do_click(self.CLOSE_TEMPLATE_MENU)
 
     def hover_on_template_tab(self):
         template_tab = self.driver.find_element(*self.TEMPLATE_TAB)
         self.hover(template_tab)
 
     def click_template_tab(self):
-        self.do_lick(self.TEMPLATE_TAB)
+        self.do_click(self.TEMPLATE_TAB)
 
     def is_template_tab_menu_display(self):
         return self.is_display(self.TEMPLATE_MENU)
@@ -318,17 +318,17 @@ class CreateWorksheetPage(BasePage):
         search_bar = self.driver.find_element(*self.SEARCH_BAR)
         search_bar.send_keys(text)
 
-        self.do_lick(self.SEARCH_BUTTON)
+        self.do_click(self.SEARCH_BUTTON)
 
     def close_search_result(self):
-        self.do_lick(self.CLOSE_SEARCH)
+        self.do_click(self.CLOSE_SEARCH)
 
     def edit_search_text(self, text):
         search_bar = self.driver.find_element(*self.SEARCH_BAR_2)
         search_bar.send_keys(Keys.CONTROL + "a" + Keys.DELETE)
         search_bar.send_keys(text)
         time.sleep(3)
-        self.do_lick(self.SEARCH_BUTTON_2)
+        self.do_click(self.SEARCH_BUTTON_2)
 
     def is_text_no_result(self):
         return self.is_display(self.TEXT_NO_RESULT)
