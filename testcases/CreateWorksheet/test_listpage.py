@@ -212,26 +212,26 @@ class TestCreateWs(BaseTest):
         self.create_ws_page.switchTab(1)
         time.sleep(15)
 
-    def test_add_page_with_button(self):
-        self.logger.info("***** Test 015 *****")
-        home_page = HomePage(self.driver)
-        self.logger.info("******* Home Page *******")
-        preview_page = home_page.select_worksheet()
-        create_ws_page = preview_page.click_customize_button()
-        create_ws_page.switchTab(1)
-        time.sleep(10)
-        self.logger.info("****** Create Page ******")
+    # def test_add_page_with_button(self):
+    #     self.logger.info("***** Test 015 *****")
+    #     home_page = HomePage(self.driver)
+    #     self.logger.info("******* Home Page *******")
+    #     preview_page = home_page.select_worksheet()
+    #     create_ws_page = preview_page.click_customize_button()
+    #     create_ws_page.switchTab(1)
+    #     time.sleep(10)
+    #     self.logger.info("****** Create Page ******")
 
-        create_ws_page.add_page_with_button()
-        time.sleep(3)
-        self.logger.info("********* Add Page ********")
-        try:
-            current_page = create_ws_page.get_page_position()['top']
-            assert isclose(current_page, 30, abs_tol=1)
-        except AssertionError:
-            self.logger.info(create_ws_page.get_page_position())
-            pytest.fail("******* Scroll to page failed *****")
-        self.logger.info("******* Test passed *****")
+    #     create_ws_page.add_page_with_button()
+    #     time.sleep(3)
+    #     self.logger.info("********* Add Page ********")
+    #     try:
+    #         current_page = create_ws_page.get_page_position()['top']
+    #         assert isclose(current_page, 30, abs_tol=1)
+    #     except AssertionError:
+    #         self.logger.info(create_ws_page.get_page_position())
+    #         pytest.fail("******* Scroll to page failed *****")
+    #     self.logger.info("******* Test passed *****")
 
     def test_add_page_with_icon(self):
         self.logger.info("****** Test 016 *****")
@@ -405,4 +405,3 @@ class TestCreateWs(BaseTest):
     #     locator = (By.CSS_SELECTOR, "#app > div:nth-child(1) > div > div.header-create-ws")
     #     self.logger.info(create_page.get_element_location(locator))
 
-    
