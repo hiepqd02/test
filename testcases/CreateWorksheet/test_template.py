@@ -41,7 +41,7 @@ class TestCreateWsTemplate(BaseTest):
 
         create_page.search_template("kjdhakj")
 
-        assert not create_page.is_text_no_result()
+        assert create_page.is_text_no_result()
 
     # 007
     def test_search_exactly_template(self):
@@ -75,9 +75,9 @@ class TestCreateWsTemplate(BaseTest):
         create_page.search_template("Pastel Fun Activity Calendar Worksheet")
         
         assert create_page.is_search_exactly_template(0)
-        time.sleep(5)
+        time.sleep(5)   
 
-        create_page.search_template("Under the Sea Word Search")
+        create_page.edit_search_text("Under the Sea Word Search")
         
         assert create_page.is_search_exactly_template(1)
 

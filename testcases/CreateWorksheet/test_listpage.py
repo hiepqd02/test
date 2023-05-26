@@ -37,6 +37,7 @@ class TestCreateWs(BaseTest):
         try:
             self.home_page = HomePage(self.driver)
             self.home_page.login()
+
             assert self.home_page.is_page_loaded()
             self.logger.info("********* Home page ***********")
         except Exception as e:
@@ -295,9 +296,11 @@ class TestCreateWs(BaseTest):
         time.sleep(5)
 
         create_page.add_page_with_icon()
+        time.sleep(1)
         assert create_page.is_page_on_tab_bar_display(2)
 
         create_page.click_duplicate_icon_on_tab_bar(2)
+        time.sleep(1)
         assert create_page.is_page_on_tab_bar_display(3) 
 
         

@@ -10,7 +10,7 @@ from pages.PreviewPage import PreviewPage
 
 class HomePage(BasePage):
     USER = (By.CSS_SELECTOR, ".user")
-    LOGIN_BUTTON = (By.CSS_SELECTOR, "div.split-user-header > div > div > div > p:nth-child(3)")
+    LOGIN_BUTTON = (By.CSS_SELECTOR, "div.split-user-header > div > div > div > p:nth-child(5)")
     INPUT = (By.CSS_SELECTOR, "#outlined-basic")
     LOGIN_AND_DOWNLOAD_BUTTON = (By.CSS_SELECTOR, "#content-step > div.auth > div > button")
 

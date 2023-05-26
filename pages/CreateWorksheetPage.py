@@ -317,6 +317,7 @@ class CreateWorksheetPage(BasePage):
     def search_template(self, text):
         search_bar = self.driver.find_element(*self.SEARCH_BAR)
         search_bar.send_keys(text)
+        time.sleep(2)
 
         self.do_click(self.SEARCH_BUTTON)
 
